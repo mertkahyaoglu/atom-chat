@@ -42,7 +42,8 @@ module.exports =
         @list.prepend new MessageView(message)
         if atom.config.get('atom-chat.openOnNewMessage')
           unless @isVisible()
-            @show()
+            @detach()
+            @attach()
 
     handleEvents: ->
       @on 'mousedown', '.atom-chat-resize-handle', (e) => @resizeStarted(e)
