@@ -12,9 +12,6 @@ module.exports =
     showOnRightSide:
       type: 'boolean'
       default: true
-    server:
-      type: 'string'
-      default: 'http://localhost:3000'
 
   atomChatView: null
 
