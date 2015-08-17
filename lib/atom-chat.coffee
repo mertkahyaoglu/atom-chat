@@ -1,4 +1,3 @@
-AtomChatView = require './atom-chat-view'
 {CompositeDisposable} = require 'atom'
 
 module.exports =
@@ -16,14 +15,21 @@ module.exports =
   atomChatView: null
 
   activate: (state) ->
-    @atomChatView = new AtomChatView()
     @subscriptions = new CompositeDisposable
+
+    @createView()
 
     @subscriptions.add atom.commands.add 'atom-workspace', "atom-chat:toggle", =>
       @atomChatView.toggle()
 
+  createView: ->
+    unless @atomChatView?
+      AtomChatView = require './atom-chat-view'
+      @atomChatView = new AtomChatView()
+    @atomChatView
+
   deactivate: ->
-    @atomChatView.destroy()
+    @atomChatView.deactivate()
     @subscriptions?.dispose()
     @subscriptions = null
 

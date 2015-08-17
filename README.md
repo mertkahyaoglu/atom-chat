@@ -5,8 +5,6 @@ Atom Chat
 
 ![Screenshot](https://github.com/mertkahyaoglu/atom-chat/blob/master/screenshot.png?raw=true)
 
-[1]: http://mertkahyaoglu.github.io/brainballs/
-
 ## Install
 
 Using `apm`:

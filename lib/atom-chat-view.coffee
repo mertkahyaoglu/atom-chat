@@ -108,7 +108,7 @@ module.exports =
         @show()
 
     show: ->
-      @attach() unless @hasParent()
+      @attach()
       @focus()
 
     attach: ->
@@ -123,7 +123,14 @@ module.exports =
     detach: ->
       @panel?.destroy()
       @panel = null
-      atom.views.getView(atom.workspace).focus()
+      @unfocus()
+
+    unfocus: ->
+      atom.workspace.getActivePane().activate()
+
+    deactivate: ->
+      @subscriptions.dispose()
+      @detach() if @panel?
 
     detached: ->
       @resizeStopped()
