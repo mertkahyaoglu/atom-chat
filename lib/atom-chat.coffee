@@ -6,9 +6,6 @@ module.exports =
     username:
       type: 'string'
       default: 'me'
-    room:
-      type: 'string'
-      default: 'Atom'
     showOnRightSide:
       type: 'boolean'
       default: true

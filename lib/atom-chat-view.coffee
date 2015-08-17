@@ -27,7 +27,6 @@ module.exports =
     initialize: () ->
       @subscriptions = new CompositeDisposable
 
-      @room = atom.config.get('atom-chat.room')
       @uuid = Math.floor(Math.random() * 1000)
       @username = atom.config.get('atom-chat.username')
 

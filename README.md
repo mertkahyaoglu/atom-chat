@@ -23,6 +23,7 @@ The atom-chat package accepts the following configuration values:
 
 * `atom-chat.username` &mdash; username displayed on the chat.
 * `atom-chat.showOnRightSide` &mdash; panel to be displayed in
+* `atom-chat.openOnNewMessage` &mdash; open panel when a message received
 
 ## Server
 
