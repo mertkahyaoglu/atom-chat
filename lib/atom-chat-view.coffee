@@ -25,7 +25,6 @@ module.exports =
         @div class: 'atom-chat-resize-handle', outlet: 'resizeHandle'
 
     initialize: () ->
-      self = @
       @subscriptions = new CompositeDisposable
 
       @room = atom.config.get('atom-chat.room')
