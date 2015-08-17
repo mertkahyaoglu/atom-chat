@@ -6,17 +6,10 @@
   height:100%;
   z-index: 2;
   overflow: hidden;
-  -webkit-user-select: none;
   width: 225px;
   min-width:200px;
   color: @text-color;
-  &[data-show-on-right-side='true'] {
-    border-left: 1px solid #181a1f;
-  }
-
-  &[data-show-on-right-side='false'] {
-    border-right: 1px solid #181a1f;
-  }
+  border-left: 1px solid #181a1f;
   .atom-chat-resize-handle {
     position: absolute;
     top: 0;
@@ -28,54 +21,53 @@
 }
 
 .chat {
-  overflow: auto;
-  color: @text-color;
-  width:100%;
-  padding: @component-padding;
-  ul {
-    padding-left: 0px;
-    li{
-      list-style: none;
-      cursor: pointer;
-      .active{
-        background-color: @text-color-subtle;
-        color: @text-color-warning;
-      }
-      vertical-align: center;
-      line-height: 30px;
-    }
-
-    .message{
-      .user {
-        color: #FFB14D;
-      }
-      .text {
-        line-height: 20px;
-        word-wrap: break-word;
-      }
-    }
-  }
-
-  .chat-scroller {
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-  }
-}
-
-.chat-header{
-  padding-left: @component-padding;
-  height: 34px;
+  height: 100%;
   width: 100%;
-  background: black;
-  position: fixed;
-  z-index: 3;
-  top: 0;
-  .chat-title {
-    padding-top:5px;
-    font-size:14px;
-    width:100%;
+  overflow: auto;
+  .chat-input {
+    padding: @component-padding;
   }
+
+  .chat-messages {
+    padding: @component-padding;
+    padding-top: 0;
+    ul {
+      padding-left: 0px;
+      margin: 0;
+      li{
+        list-style: none;
+        .active{
+          background-color: @text-color-subtle;
+          color: @text-color-warning;
+        }
+        vertical-align: center;
+      }
+
+      .message{
+        padding: @component-icon-padding;
+        .user {
+          color: #FFB14D;
+        }
+        .text {
+          word-wrap: break-word;
+        }
+      }
+    }
+  }
+
+  .chat-header{
+    padding: @component-padding;
+    height: 34px;
+    padding: 7px;
+    width: 100%;
+    background: black;
+    z-index: 3;
+    .chat-title {
+      font-size:13px;
+      width:100%;
+    }
+  }
+
 }
 
 .platform-win32 {

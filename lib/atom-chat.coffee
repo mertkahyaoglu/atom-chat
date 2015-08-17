@@ -6,15 +6,12 @@ module.exports =
     username:
       type: 'string'
       default: 'me'
-    room:
-      type: 'string'
-      default: 'Atom'
     showOnRightSide:
       type: 'boolean'
       default: true
-    server:
-      type: 'string'
-      default: 'http://localhost:3000'
+    openOnNewMessage:
+      type: 'boolean'
+      default: false
 
   atomChatView: null
 

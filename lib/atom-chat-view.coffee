@@ -5,6 +5,8 @@ socket = require('socket.io-client')('https://atom-chat-server.herokuapp.com');
 
 module.exports =
   class AtomChatView extends ScrollView
+    panel = null
+
     @content: ->
       chatEditor = new TextEditor
         mini: true
@@ -14,21 +16,19 @@ module.exports =
         buffer: new TextBuffer
         placeholderText: 'Type here'
 
-      @div class: 'atom-chat-wrapper', outlet: 'wrapper', 'data-show-on-right-side': atom.config.get('atom-chat.showOnRightSide'), =>
-        @div class: 'chat-header list-inline tab-bar inset-panel', =>
-          @div "Atom Chat", class: 'chat-title', outlet: 'title'
+      @div class: 'atom-chat-wrapper', outlet: 'wrapper', =>
         @div class: 'chat', =>
+          @div class: 'chat-header list-inline tab-bar inset-panel', =>
+            @div "Atom Chat", class: 'chat-title', outlet: 'title'
           @div class: 'chat-input', =>
             @subview 'chatEditor', new TextEditorView(editor: chatEditor)
-          @div class: 'chat-scroller', outlet: 'scroller', =>
+          @div class: 'chat-messages', outlet: 'messages', =>
             @ul tabindex: -1, outlet: 'list'
         @div class: 'atom-chat-resize-handle', outlet: 'resizeHandle'
 
     initialize: () ->
-      self = @
       @subscriptions = new CompositeDisposable
 
-      @room = atom.config.get('atom-chat.room')
       @uuid = Math.floor(Math.random() * 1000)
       @username = atom.config.get('atom-chat.username')
 
@@ -42,6 +42,10 @@ module.exports =
       socket.on 'atom:message', (message) =>
         console.log "New Message", message
         @list.prepend new MessageView(message)
+        if atom.config.get('atom-chat.openOnNewMessage')
+          unless @isVisible()
+            @detach()
+            @attach()
 
     handleEvents: ->
       @on 'mousedown', '.atom-chat-resize-handle', (e) => @resizeStarted(e)
@@ -110,14 +114,15 @@ module.exports =
     attach: ->
       if atom.config.get('atom-chat.showOnRightSide')
         @removeClass('panel-left')
-        @findPanel = atom.workspace.addRightPanel(item: this, className: 'panel-right')
+        @panel = atom.workspace.addRightPanel(item: this, className: 'panel-right')
       else
         @removeClass('panel-right')
-        @findPanel = atom.workspace.addLeftPanel(item: this, className: 'panel-left')
+        @panel = atom.workspace.addLeftPanel(item: this, className: 'panel-left')
       @chatEditor.focus()
 
     detach: ->
-      super
+      @panel?.destroy()
+      @panel = null
       atom.views.getView(atom.workspace).focus()
 
     detached: ->
