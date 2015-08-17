@@ -15,12 +15,12 @@ module.exports =
         placeholderText: 'Type here'
 
       @div class: 'atom-chat-wrapper', outlet: 'wrapper', 'data-show-on-right-side': atom.config.get('atom-chat.showOnRightSide'), =>
-        @div class: 'chat-header list-inline tab-bar inset-panel', =>
-          @div "Atom Chat", class: 'chat-title', outlet: 'title'
         @div class: 'chat', =>
+          @div class: 'chat-header list-inline tab-bar inset-panel', =>
+            @div "Atom Chat", class: 'chat-title', outlet: 'title'
           @div class: 'chat-input', =>
             @subview 'chatEditor', new TextEditorView(editor: chatEditor)
-          @div class: 'chat-scroller', outlet: 'scroller', =>
+          @div class: 'chat-messages', outlet: 'messages', =>
             @ul tabindex: -1, outlet: 'list'
         @div class: 'atom-chat-resize-handle', outlet: 'resizeHandle'
 
