@@ -12,6 +12,9 @@ module.exports =
     showOnRightSide:
       type: 'boolean'
       default: true
+    openOnNewMessage:
+      type: 'boolean'
+      default: false
 
   atomChatView: null
 

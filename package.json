@@ -1,6 +1,6 @@
 {
   "name": "atom-chat",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Atom Chat",
   "repository": "https://github.com/mertkahyaoglu/atom-chat",
   "main": "lib/atom-chat.coffee",
@@ -18,8 +18,5 @@
   },
   "author": "Mert Kahyaoğlu",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/mertkahyaoglu/atom-chat/issues"
-  },
   "homepage": ""
 }
