@@ -41,6 +41,9 @@ module.exports =
       socket.on 'atom:message', (message) =>
         console.log "New Message", message
         @list.prepend new MessageView(message)
+        if atom.config.get('atom-chat.openOnNewMessage')
+          unless @isVisible()
+            @show()
 
     handleEvents: ->
       @on 'mousedown', '.atom-chat-resize-handle', (e) => @resizeStarted(e)
