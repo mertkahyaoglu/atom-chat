@@ -1,0 +1,16 @@
+# See https://atom.io/docs/latest/creating-a-package#menus for more details
+'context-menu':
+  '.overlayer':
+      'Enable Atom Chat': 'atom-chat:toggle'
+
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'Atom Chat'
+      'submenu': [
+        { 'label': 'Toggle', 'command': 'atom-chat:toggle' }
+      ]
+    ]
+  }
+]
