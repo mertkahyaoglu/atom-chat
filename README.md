@@ -28,8 +28,8 @@ The atom-chat package accepts the following configuration values:
 Currently Atom Chat running on Heroku server. [Go to repo](https://github.com/mertkahyaoglu/atom-chat-server)
 
 ## TODOS
-
-* Chat rooms
-* GitHub integration
-* Private messaging
-* Emoji
+- [ ] Chat rooms
+- [ ] GitHub integration
+- [ ] Private messaging
+- [ ] Emoji
+- [ ] Code highlight
