@@ -29,13 +29,7 @@ module.exports =
 
     initialize: () ->
       @subscriptions = new CompositeDisposable
-
-      @uuid = Math.floor(Math.random() * 1000)
-      if atom.config.get('atom-chat.username') is "User"
-        @username = "User"+@uuid
-      else
-        @username = atom.config.get('atom-chat.username')
-
+      @username = atom.config.get('atom-chat.username')
       @handleSockets()
       @handleEvents()
 
@@ -44,6 +38,8 @@ module.exports =
         console.log "Connected"
         socket.emit 'atom:user', @username, (id) =>
           @uuid = id
+          if @username is "User"
+            @username = "User"+@uuid
 
       socket.on 'atom:message', (message) =>
         console.log "New Message", message
@@ -58,9 +54,9 @@ module.exports =
         @toolTipDisposable?.dispose()
         if online > 0
           @title.html('Atom Chat ('+online+')')
-          title = "Online: #{_.pluralize(online, 'user')}"
+          title = "#{_.pluralize(online, 'user')} online"
         else
-          title = "Online: 0 user"
+          title = "Nobody online"
           @title.html('Atom Chat')
         @toolTipDisposable = atom.tooltips.add @title, title: title
 
@@ -74,8 +70,11 @@ module.exports =
 
       #on username change
       @subscriptions.add atom.config.onDidChange 'atom-chat.username', ({newValue}) =>
-        socket.emit 'atom:username', newValue
-        @username = newValue
+        socket.emit 'atom:username', @username
+        if newValue is "User"
+          @username = newValue+@uuid
+        else
+          @username = newValue
 
     onSideToggled: (newValue) ->
       @element.dataset.showOnRightSide = newValue
