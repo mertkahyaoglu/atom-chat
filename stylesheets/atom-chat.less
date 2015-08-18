@@ -57,14 +57,30 @@
 
   .chat-header{
     padding: @component-padding;
-    height: 34px;
-    padding: 7px;
+    line-height: 13px;
     width: 100%;
     background: black;
     z-index: 3;
     .chat-title {
       font-size:13px;
       width:100%;
+      cursor: default;
+      text-align: center;
+    }
+  }
+
+  .chat-footer {
+    display: block;
+    position: absolute;
+    bottom:0;
+    padding: @component-icon-padding;
+    height: @component-line-height + 5px;
+    width: 100%;
+    border-top: 1px solid #181a1f;
+    overflow: hidden;
+    font-size: 11px;
+    a, a:hover {
+      color: @text-color;
     }
   }
 

@@ -1,18 +1,21 @@
 {CompositeDisposable} = require 'atom'
 
+atomChatView = null
+
 module.exports =
   config:
     username:
       type: 'string'
-      default: 'me'
+      default: 'User'
+      description: 'Username that will be displayed on the chat.'
     showOnRightSide:
       type: 'boolean'
       default: true
+      description: 'Show panel on the right side of the workspace.'
     openOnNewMessage:
       type: 'boolean'
       default: false
-
-  atomChatView: null
+      description: 'Open chat when a new message received.'
 
   activate: (state) ->
     @subscriptions = new CompositeDisposable

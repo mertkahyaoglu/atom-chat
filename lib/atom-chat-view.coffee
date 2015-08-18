@@ -1,3 +1,4 @@
+_ = require 'underscore-plus'
 {$, ScrollView, View, TextEditorView} = require 'atom-space-pen-views'
 {CompositeDisposable, TextEditor, TextBuffer} = require 'atom'
 MessageView = require './message-view'
@@ -30,14 +31,19 @@ module.exports =
       @subscriptions = new CompositeDisposable
 
       @uuid = Math.floor(Math.random() * 1000)
-      @username = atom.config.get('atom-chat.username')
+      if atom.config.get('atom-chat.username') is "User"
+        @username = "User"+@uuid
+      else
+        @username = atom.config.get('atom-chat.username')
 
       @handleSockets()
       @handleEvents()
 
     handleSockets: ->
       socket.on 'connect', =>
-        console.log "Socket connected"
+        console.log "Connected"
+        socket.emit 'atom:user', @username, (id) =>
+          @uuid = id
 
       socket.on 'atom:message', (message) =>
         console.log "New Message", message
@@ -46,6 +52,17 @@ module.exports =
           unless @isVisible()
             @detach()
             @attach()
+
+      socket.on 'atom:online', (online) =>
+        console.log "Online:", online
+        @toolTipDisposable?.dispose()
+        if online > 0
+          @title.html('Atom Chat ('+online+')')
+          title = "Online: #{_.pluralize(online, 'user')}"
+        else
+          title = "Online: 0 user"
+          @title.html('Atom Chat')
+        @toolTipDisposable = atom.tooltips.add @title, title: title
 
     handleEvents: ->
       @on 'mousedown', '.atom-chat-resize-handle', (e) => @resizeStarted(e)
@@ -57,6 +74,7 @@ module.exports =
 
       #on username change
       @subscriptions.add atom.config.onDidChange 'atom-chat.username', ({newValue}) =>
+        socket.emit 'atom:username', newValue
         @username = newValue
 
     onSideToggled: (newValue) ->
