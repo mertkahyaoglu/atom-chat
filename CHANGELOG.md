@@ -3,4 +3,5 @@
 
 ## Features
 
-- Add chat rooms
+- Add chat rooms.
+- Now runs on a permanent server.
