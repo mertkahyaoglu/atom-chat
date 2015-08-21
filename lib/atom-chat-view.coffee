@@ -1,8 +1,8 @@
-_ = require 'underscore-plus'
 {$, ScrollView, View, TextEditorView} = require 'atom-space-pen-views'
 {CompositeDisposable, TextEditor, TextBuffer} = require 'atom'
 MessageView = require './message-view'
-socket = require('socket.io-client')('https://atom-chat-server.herokuapp.com');
+_ = require 'underscore-plus'
+socket = require('socket.io-client')('http://mert-kahyaoglu.com:49161');
 
 module.exports =
   class AtomChatView extends ScrollView
@@ -17,7 +17,7 @@ module.exports =
         buffer: new TextBuffer
         placeholderText: 'Type here'
 
-      @div class: 'atom-chat-wrapper', outlet: 'wrapper', =>
+      @div class: 'atom-chat', outlet: 'wrapper', =>
         @div class: 'chat', =>
           @div class: 'chat-header list-inline tab-bar inset-panel', =>
             @div "Atom Chat", class: 'chat-title', outlet: 'title'
@@ -25,6 +25,9 @@ module.exports =
             @subview 'chatEditor', new TextEditorView(editor: chatEditor)
           @div class: 'chat-messages', outlet: 'messages', =>
             @ul tabindex: -1, outlet: 'list'
+          @div class: 'chat-footer', =>
+            @a "Room: Atom", class: 'chat-room', outlet: 'roomSelect'
+            @a "+", class: 'add-room', outlet: 'addRoom'
         @div class: 'atom-chat-resize-handle', outlet: 'resizeHandle'
 
     initialize: () ->
@@ -32,49 +35,47 @@ module.exports =
       @username = atom.config.get('atom-chat.username')
       @handleSockets()
       @handleEvents()
+      @room = 0
 
     handleSockets: ->
       socket.on 'connect', =>
-        console.log "Connected"
         socket.emit 'atom:user', @username, (id) =>
           @uuid = id
           if @username is "User"
             @username = "User"+@uuid
 
       socket.on 'atom:message', (message) =>
-        console.log "New Message", message
-        @list.prepend new MessageView(message)
-        if atom.config.get('atom-chat.openOnNewMessage')
-          unless @isVisible()
-            @detach()
-            @attach()
+        @addMessage(message)
 
       socket.on 'atom:online', (online) =>
-        console.log "Online:", online
-        @toolTipDisposable?.dispose()
-        if online > 0
-          @title.html('Atom Chat ('+online+')')
-          title = "#{_.pluralize(online, 'user')} online"
-        else
-          title = "Nobody online"
-          @title.html('Atom Chat')
-        @toolTipDisposable = atom.tooltips.add @title, title: title
+        @showOnline(online)
+
 
     handleEvents: ->
       @on 'mousedown', '.atom-chat-resize-handle', (e) => @resizeStarted(e)
       @on 'keyup', '.chat-input .editor', (e) => @enterPressed(e)
+      @on 'click', '.chat-room', => @roomsClicked()
+      @on 'click', '.add-room', => @addRoomClicked()
 
-      #on showOnRightSide setting change
       @subscriptions.add atom.config.onDidChange 'atom-chat.showOnRightSide', ({newValue}) =>
         @onSideToggled(newValue)
 
-      #on username change
       @subscriptions.add atom.config.onDidChange 'atom-chat.username', ({newValue}) =>
-        socket.emit 'atom:username', @username
         if newValue is "User"
           @username = newValue+@uuid
         else
           @username = newValue
+        socket.emit 'atom:username', @username
+
+    showOnline: (online)->
+      @toolTipDisposable?.dispose()
+      if online > 0
+        @title.html('Atom Chat ('+online+')')
+        title = "#{_.pluralize(online, 'user')} online"
+      else
+        title = "Nobody online"
+        @title.html('Atom Chat')
+      @toolTipDisposable = atom.tooltips.add @title, title: title
 
     onSideToggled: (newValue) ->
       @element.dataset.showOnRightSide = newValue
@@ -85,13 +86,41 @@ module.exports =
     enterPressed: (e) ->
       key = e.keyCode || e.which
       if key == 13
-        msg = @chatEditor.getText()
-        @chatEditor.setText('')
-        message =
-          text: msg
-          uuid: @uuid
-          username: @username
-        socket.emit 'atom:message', message
+        @sendMessage()
+
+    addMessage: (message)->
+      if message.roomId is @room
+        @list.prepend new MessageView(message)
+        if atom.config.get('atom-chat.openOnNewMessage')
+          unless @isVisible()
+            @detach()
+            @attach()
+
+    sendMessage: ->
+      msg = @chatEditor.getText()
+      @chatEditor.setText('')
+      message =
+        text: msg
+        uuid: @uuid
+        username: @username
+        roomId: @room
+
+      socket.emit 'atom:message', message
+
+    createRoom: (roomName) ->
+      socket.emit "atom:rooms:create", roomName, (id) =>
+        @setCurrentRoom({id:id, name:roomName})
+        @list.empty()
+
+    joinRoom: (id) ->
+      socket.emit "atom:rooms:join", id
+      @list.empty()
+
+    roomsClicked: ->
+      atom.commands.dispatch(atom.views.getView(atom.workspace), 'room-selector:show')
+
+    addRoomClicked: ->
+      atom.commands.dispatch(atom.views.getView(atom.workspace), 'add-room:show')
 
     resizeStarted: =>
       $(document).on('mousemove', @resizeChatView)
@@ -103,20 +132,32 @@ module.exports =
 
     resizeChatView: ({pageX, which}) =>
       return @resizeStopped() unless which is 1
-
       if atom.config.get('atom-chat.showOnRightSide')
         width = @outerWidth() + @offset().left - pageX
       else
         width = pageX - @offset().left
       @width(width)
 
-    # Returns an object that can be retrieved when package is activated
+    getSocket: ->
+      socket
+
+    getCurrentRoom: ->
+      @room
+
+    setCurrentRoom: (roomData) ->
+      @room = roomData.id
+      @roomSelect.html("Room: "+ roomData.name);
+
+    getUserId: ->
+      @uuid
+
     serialize: ->
 
     destroy: ->
       @detach()
       @subscriptions?.dispose()
       @subscriptions = null
+      @toolTipDisposable?.dispose()
 
     toggle: ->
       if @isVisible()
