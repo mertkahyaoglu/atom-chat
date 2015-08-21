@@ -17,6 +17,5 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Mert Kahyaoğlu",
-  "license": "ISC",
-  "homepage": ""
+  "license": "MIT"
 }

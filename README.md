@@ -25,11 +25,10 @@ The atom-chat package accepts the following configuration values:
 
 ## Server
 
-Currently Atom Chat running on Heroku server. [Go to repo](https://github.com/mertkahyaoglu/atom-chat-server)
+Atom Chat running on a Node server. [Go to repo.](https://github.com/mertkahyaoglu/atom-chat-server)
 
 ## TODOS
-- [ ] Chat rooms
+- [x] Chat rooms
 - [ ] GitHub integration
-- [ ] Private messaging
 - [ ] Emoji
 - [ ] Code highlight
