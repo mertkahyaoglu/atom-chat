@@ -1,3 +1,10 @@
+<a name="v1.0.1"></a>
+# v1.0.1
+
+## Bug Fixes
+
+- fix resize handler for windows
+
 <a name="v1.0.0"></a>
 # v1.0.0
 
