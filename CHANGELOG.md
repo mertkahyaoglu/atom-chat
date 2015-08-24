@@ -1,4 +1,11 @@
-<a name="v1.1.0"></a>
+<a name="v1.3.0"></a>
+# v1.3.0
+
+## Keymap
+
+- Change keymap to ctrl-alt-c / cmd-alt-c
+
+<a name="v1.2.0"></a>
 # v1.2.0
 
 ## Bug Fixes

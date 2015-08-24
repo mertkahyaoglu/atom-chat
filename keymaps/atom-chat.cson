@@ -8,7 +8,7 @@
 # For more detailed documentation see
 # https://atom.io/docs/latest/advanced/keymaps
 '.platform-darwin':
-  'cmd-;': 'atom-chat:toggle'
+  'cmd-alt-c': 'atom-chat:toggle'
 
 '.platform-win32, .platform-linux':
-  'ctrl-;': 'atom-chat:toggle'
+  'ctrl-alt-c': 'atom-chat:toggle'
