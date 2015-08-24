@@ -1,5 +1,12 @@
-<a name="v1.0.1"></a>
-# v1.0.1
+<a name="v1.1.0"></a>
+# v1.2.0
+
+## Bug Fixes
+
+- fix light theme appearance
+
+<a name="v1.1.0"></a>
+# v1.1.0
 
 ## Bug Fixes
 

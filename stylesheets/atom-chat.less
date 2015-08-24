@@ -9,7 +9,7 @@
   width: 225px;
   min-width:200px;
   color: @text-color;
-  border-left: 1px solid #181a1f;
+  border-left: 1px solid @base-border-color;
   .atom-chat-resize-handle {
     position: absolute;
     top: 0;
@@ -60,13 +60,13 @@
     padding: @component-padding;
     line-height: 13px;
     width: 100%;
-    background: black;
     z-index: 3;
     .chat-title {
       font-size:13px;
       width:100%;
       cursor: default;
       text-align: center;
+      color: @text-color;
     }
   }
 
@@ -74,17 +74,16 @@
     display: block;
     position: absolute;
     bottom:0;
-    padding: @component-icon-padding;
-    height: @component-line-height + 5px;
+    padding: @component-icon-padding + 1px 0 @component-icon-padding @component-icon-padding;
     width: 100%;
-    border-top: 1px solid #181a1f;
+    border-top: 1px solid @base-border-color;
     overflow: hidden;
     font-size: 11px;
     .add-room {
       float: right;
       color: #35AC19;
       font-size: 13px;
-      padding-right: 4px;
+      padding-right: @component-padding;
     }
     .chat-room {
       color: @text-color;
