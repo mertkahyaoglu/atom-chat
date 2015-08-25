@@ -1,3 +1,17 @@
+<a name="v1.6.0"></a>
+# v1.6.0
+
+## Feature
+
+- resize to fit content on double click
+
+<a name="v1.5.0"></a>
+# v1.5.0
+
+## Bug fix
+
+- fix attribute name
+
 <a name="v1.4.0"></a>
 # v1.4.0
 
