@@ -1,6 +1,6 @@
 {
   "name": "atom-chat",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "Atom Chat",
   "repository": "https://github.com/mertkahyaoglu/atom-chat",
   "main": "./lib/atom-chat.coffee",
