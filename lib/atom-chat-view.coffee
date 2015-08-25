@@ -113,7 +113,7 @@ module.exports =
         @list.empty()
 
     joinRoom: (room) ->
-      unless @roomId is room.id
+      unless @room is room.id
         socket.emit "atom:rooms:join", room.id
         @setCurrentRoom room
         @list.empty()
