@@ -27,8 +27,7 @@ class RoomListView extends SelectListView
     @currentRoom = null
 
   confirmed: (room) ->
-    @atomChat.joinRoom room.id
-    @atomChat.setCurrentRoom(room)
+    @atomChat.joinRoom room
     @cancel()
 
   attach: ->

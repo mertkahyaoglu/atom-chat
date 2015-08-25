@@ -1,3 +1,10 @@
+<a name="v1.4.0"></a>
+# v1.4.0
+
+## Bug fix
+
+- Do not add to the room if the user is already in that room
+
 <a name="v1.3.0"></a>
 # v1.3.0
 

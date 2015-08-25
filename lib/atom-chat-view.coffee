@@ -112,9 +112,11 @@ module.exports =
         @setCurrentRoom({id:id, name:roomName})
         @list.empty()
 
-    joinRoom: (id) ->
-      socket.emit "atom:rooms:join", id
-      @list.empty()
+    joinRoom: (room) ->
+      unless @roomId is room.id
+        socket.emit "atom:rooms:join", room.id
+        @setCurrentRoom room
+        @list.empty()
 
     roomsClicked: ->
       atom.commands.dispatch(atom.views.getView(atom.workspace), 'room-selector:show')
