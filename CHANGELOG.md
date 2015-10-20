@@ -1,5 +1,5 @@
-<a name="v1.6.1"></a>
-# v1.6.1
+<a name="v1.7.0"></a>
+# v1.7.0
 
 ## Deprecated
 
