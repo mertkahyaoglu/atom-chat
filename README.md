@@ -1,4 +1,5 @@
-Atom Chat
+Atom Chat - [![Build Status](https://travis-ci.org/mertkahyaoglu/atom-chat.svg?branch=master)](https://travis-ci.org/mertkahyaoglu/atom-chat)
+
 ==========
 
 >Chat package for Atom Editor
