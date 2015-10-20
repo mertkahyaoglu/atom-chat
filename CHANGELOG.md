@@ -1,3 +1,10 @@
+<a name="v1.6.1"></a>
+# v1.6.1
+
+## Deprecated
+
+- Package.getStylesheetsPath is deprecated.
+
 <a name="v1.6.0"></a>
 # v1.6.0
 
