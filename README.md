@@ -1,7 +1,7 @@
-Atom Chat - Not Active Anymore!!! [![Build Status](https://travis-ci.org/mertkahyaoglu/atom-chat.svg?branch=master)](https://travis-ci.org/mertkahyaoglu/atom-chat)
+Atom Chat [![Build Status](https://travis-ci.org/mertkahyaoglu/atom-chat.svg?branch=master)](https://travis-ci.org/mertkahyaoglu/atom-chat)
 ==========
 
->Chat package for Atom Editor [Offline]
+>Chat package for Atom Editor
 
 ![Screenshot](https://github.com/mertkahyaoglu/atom-chat/blob/master/screenshot.png?raw=true)
 
