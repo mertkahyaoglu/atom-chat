@@ -1,3 +1,10 @@
+<a name="v2.0.0"></a>
+# v2.0.0
+
+## Internal
+
+- update deps
+
 <a name="v1.9.0"></a>
 # v1.9.0
 
