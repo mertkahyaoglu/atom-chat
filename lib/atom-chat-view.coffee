@@ -2,7 +2,7 @@
 {CompositeDisposable, TextEditor, TextBuffer} = require 'atom'
 MessageView = require './message-view'
 _ = require 'underscore-plus'
-socket = require('socket.io-client')('https://atom-chat-server.herokuapp.com/');
+socket = require('socket.io-client')('https://atom-chat-server.herokuapp.com:3000');
 
 module.exports =
   class AtomChatView extends ScrollView
