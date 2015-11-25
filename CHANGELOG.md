@@ -1,3 +1,10 @@
+<a name="v1.8.0"></a>
+# v1.8.0
+
+## Internal
+
+- Moved to Heroku server
+
 <a name="v1.7.0"></a>
 # v1.7.0
 
