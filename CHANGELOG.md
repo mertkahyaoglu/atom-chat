@@ -1,3 +1,10 @@
+<a name="v1.12.0"></a>
+# v1.12.0
+
+## Bug
+
+- Improve layout
+
 <a name="v1.10.0"></a>
 # v1.10.0
 
