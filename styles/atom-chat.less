@@ -1,11 +1,9 @@
 @import "ui-variables";
 
 .atom-chat{
+  display: flex;
+  flex-direction: column;
   position: relative;
-  width:100%;
-  height:100%;
-  z-index: 2;
-  overflow: hidden;
   width: 225px;
   min-width:200px;
   color: @text-color;
@@ -21,14 +19,18 @@
 }
 
 .chat {
-  height: 100%;
-  width: 100%;
-  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
   .chat-input {
     padding: @component-padding;
   }
 
   .chat-messages {
+    flex: 1 1 0;
+    overflow-x: hidden;
+    overflow-y: auto;
     padding: @component-padding;
     padding-top: 0;
     ul {
@@ -57,36 +59,34 @@
   }
 
   .chat-header{
+    display: block;
+    text-align: center;
     padding: @component-padding;
     line-height: 13px;
-    width: 100%;
-    z-index: 3;
     .chat-title {
       font-size:13px;
-      width:100%;
       cursor: default;
-      text-align: center;
       color: @text-color;
     }
   }
 
   .chat-footer {
-    display: block;
-    position: absolute;
-    bottom:0;
+    display: flex;
     padding: @component-icon-padding + 1px 0 @component-icon-padding @component-icon-padding;
-    width: 100%;
     border-top: 1px solid @base-border-color;
-    overflow: hidden;
     font-size: 11px;
+    .chat-room {
+      flex: 1 1 0;
+      color: @text-color;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
     .add-room {
-      float: right;
       color: #35AC19;
       font-size: 13px;
+      padding-left: @component-padding;
       padding-right: @component-padding;
-    }
-    .chat-room {
-      color: @text-color;
     }
   }
 
