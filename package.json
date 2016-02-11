@@ -9,6 +9,23 @@
     "socket.io-client": "^1.3.6",
     "underscore-plus": "^1.2.2"
   },
+  "configSchema": {
+    "username": {
+      "type": "string",
+      "default": "User",
+      "description": "Username that will be displayed on the chat."
+    },
+    "showOnRightSide": {
+      "type": "boolean",
+      "default": true,
+      "description": "Show panel on the right side of the workspace."
+    },
+    "openOnNewMessage": {
+      "type": "boolean",
+      "default": false,
+      "description": "Open chat when a new message received."
+    }
+  },
   "engines": {
     "atom": ">0.50.0"
   },
