@@ -20,7 +20,7 @@ Or search for `atom-chat` in Atom settings view.
 The atom-chat package accepts the following configuration values:
 
 * `atom-chat.username` &mdash; username displayed on the chat.
-* `atom-chat.showOnRightSide` &mdash; panel to be displayed in
+* `atom-chat.showOnRightSide` &mdash; show the panel on the right side (default:left)
 * `atom-chat.openOnNewMessage` &mdash; open panel when a new message received
 
 ## Server
